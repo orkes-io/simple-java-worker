@@ -42,8 +42,10 @@ public class SimpleJavaWorker implements Worker {
                 .basePath(BASE_PATH)
                 .keyId(KEY)
                 .keySecret(SECRET)
-                // Set a proxy if needed - you can test it with: mitmproxy --mode regular@8888
-                // .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)))
+                // Set a Proxy. You can test it with something like `mitmproxy --mode regular@8888`
+                //.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)))
+                // Disable SSL certificate validation. WARNING: Dangerous - Should only be used in development environments
+                //.verifyingSsl(false)
                 .build();
 
         TaskClient taskClient = new OrkesClients(client).getTaskClient();
