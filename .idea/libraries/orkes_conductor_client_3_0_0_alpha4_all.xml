@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="orkes-conductor-client-3.0.0-alpha4-all">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/orkes-conductor-client-3.0.0-alpha4-all.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
