@@ -10,6 +10,8 @@ import io.orkes.conductor.client.automator.TaskRunnerConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.List;
 
 public class SimpleJavaWorker implements Worker {
@@ -36,8 +38,15 @@ public class SimpleJavaWorker implements Worker {
     }
 
     public static void main(String[] args) {
-        TaskClient taskClient = new OrkesClients(new ApiClient(ROOT_URI, KEY, SECRET))
-                .getTaskClient();
+        ApiClient client = ApiClient.builder()
+                .basePath(BASE_PATH)
+                .keyId(KEY)
+                .keySecret(SECRET)
+                // Set a proxy if needed - you can test it with: mitmproxy --mode regular@8888
+                // .proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)))
+                .build();
+
+        TaskClient taskClient = new OrkesClients(client).getTaskClient();
         TaskRunnerConfigurer runnerConfigurer = new TaskRunnerConfigurer
                 .Builder(taskClient, List.of(new SimpleJavaWorker()))
                 .withThreadCount(10)
