@@ -17,9 +17,10 @@ public class SimpleJavaWorker implements Worker {
 
     private static final Logger LOGGER = LogManager.getLogger(SimpleJavaWorker.class);
 
+    // Get your KEY and SECRET from your server - https://www.youtube.com/watch?v=f1b5vZRKn2Q
     private static final String ROOT_URI = "http://localhost:8080/api";
-    private static final String KEY = "AccessKeyId2";
-    private static final String SECRET = "AccessKeySecret2";
+    private static final String KEY = "_CHANGE_ME_";
+    private static final String SECRET = "_CHANGE_ME_";
 
     @Override
     public String getTaskDefName() {
