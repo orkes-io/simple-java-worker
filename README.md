@@ -1,6 +1,6 @@
 # Simple Java Worker
 
-This example uses Orkes Java Client 3 fat jar: `libs/orkes-conductor-client-${version}-all.jar`.
+This example uses Orkes Java Client v4 fat jar: `libs/orkes-conductor-client-4.0.0-all.jar`.
 
 Min Java Version: 11.
 
