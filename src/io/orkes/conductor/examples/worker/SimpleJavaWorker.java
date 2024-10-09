@@ -1,12 +1,11 @@
 package io.orkes.conductor.examples.worker;
 
+import com.netflix.conductor.client.automator.TaskRunnerConfigurer;
+import com.netflix.conductor.client.http.TaskClient;
 import com.netflix.conductor.client.worker.Worker;
 import com.netflix.conductor.common.metadata.tasks.Task;
 import com.netflix.conductor.common.metadata.tasks.TaskResult;
 import io.orkes.conductor.client.ApiClient;
-import io.orkes.conductor.client.OrkesClients;
-import io.orkes.conductor.client.TaskClient;
-import io.orkes.conductor.client.automator.TaskRunnerConfigurer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,17 +37,16 @@ public class SimpleJavaWorker implements Worker {
     }
 
     public static void main(String[] args) {
-        ApiClient client = ApiClient.builder()
+        ApiClient apiClient = ApiClient.builder()
                 .basePath(BASE_PATH)
-                .keyId(KEY)
-                .keySecret(SECRET)
+                .credentials(KEY, SECRET)
                 // Set a Proxy. You can test it with something like `mitmproxy --mode regular@8888`
                 //.proxy(new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8888)))
                 // Disable SSL certificate validation. WARNING: Dangerous - Should only be used in development environments
                 //.verifyingSsl(false)
                 .build();
 
-        TaskClient taskClient = new OrkesClients(client).getTaskClient();
+        TaskClient taskClient = new TaskClient(apiClient);
         TaskRunnerConfigurer runnerConfigurer = new TaskRunnerConfigurer
                 .Builder(taskClient, List.of(new SimpleJavaWorker()))
                 .withThreadCount(10)
